@@ -6,4 +6,5 @@
 ///
 library;
 
-export 'src/auth_service.dart';
+export 'src/extensions/json_map_extensions.dart';
+export 'src/middleware/verify_git_hub_signature.dart';

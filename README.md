@@ -4,23 +4,35 @@ Helper functions for Dart microservices responding to GitHub webhooks.
 
 ## Features
 
-AuthService
+### verifyGitHubSignature Middleware
 
-- Verify the sender
-- Uses a secret key to calculate a signature from the body and compare it with the signature that was also sent with the request
+Verify the sender was GitHub by using a secret key to calculate a signature from the body and compare it with the signature that was also sent with the request.
 
 ## Getting started
 
-TODO: List prerequisites and provide or point to information on how to
-start using the package.
+Get the webhook secret from ...
+
+Add an environment variable named WEBHOOK_SECRET with:
+
+- on Cloud Run
+  - a
+
+- on Compute Engine
+  - a
+
+- Locally
+  - a
 
 ## Usage
 
-TODO: Include short and useful examples for package users. Add longer examples
-to `/example` folder. 
+Use `verifyGitHubSignature()` in a shelf Pipeline like this:
 
 ```dart
-const like = 'sample';
+final requestHandler = const Pipeline()
+  .addMiddleware(verifyGitHubSignature(Platform.environment['WEBHOOK_SECRET']!))
+  .addHandler(_yourHandler);
+
+final server = await serve(requestHandler, 'localhost', 8080);
 ```
 
 ## Additional information
